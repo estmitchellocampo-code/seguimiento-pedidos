@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
 
@@ -10,15 +11,15 @@ function Dashboard() {
 
       <div className="container mt-4">
 
-        <h1 className="mb-4">
+        <h1 className="mb-4 fw-bold">
           Dashboard
         </h1>
 
         <div className="row">
 
-          <div className="col-md-4">
+          <div className="col-md-4 mb-4">
 
-            <div className="card p-4 shadow">
+            <div className="card p-4 shadow-lg border-0">
 
               <h3>Pedidos</h3>
 
@@ -26,20 +27,20 @@ function Dashboard() {
                 15
               </p>
 
-              <a
-                href="/pedidos"
+              <Link
+                to="/pedidos"
                 className="btn btn-primary"
               >
                 Ver pedidos
-              </a>
+              </Link>
 
             </div>
 
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mb-4">
 
-            <div className="card p-4 shadow">
+            <div className="card p-4 shadow-lg border-0">
 
               <h3>Repartidores</h3>
 

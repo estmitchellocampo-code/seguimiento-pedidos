@@ -4,7 +4,10 @@ function Navbar() {
 
   return (
 
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav
+      className="navbar navbar-expand-lg navbar-dark"
+      style={{ background: '#141e30' }}
+    >
 
       <div className="container">
 

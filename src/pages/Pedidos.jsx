@@ -11,59 +11,57 @@ function Pedidos() {
 
       <div className="container mt-4">
 
-        <h1 className="mb-4">
+        <h1 className="mb-4 fw-bold">
           Gestión de Pedidos
         </h1>
 
-        <div className="card p-4 mb-4">
+        <div className="card p-4 mb-4 shadow-lg border-0">
 
-  <h3 className="mb-3">
-    Crear Pedido
-  </h3>
+          <h3 className="mb-3">
+            Crear Pedido
+          </h3>
 
-  <div className="row">
+          <div className="row">
 
-    <div className="col-md-4">
+            <div className="col-md-4 mb-3">
 
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Cliente"
-      />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Cliente"
+              />
 
-    </div>
+            </div>
 
-    <div className="col-md-4">
+            <div className="col-md-4 mb-3">
 
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Estado"
-      />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Estado"
+              />
 
-    </div>
+            </div>
 
-    <div className="col-md-4">
+            <div className="col-md-4 mb-3">
 
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Repartidor"
-      />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Repartidor"
+              />
 
-    </div>
+            </div>
 
-  </div>
+          </div>
 
-  <button className="btn btn-success mt-3">
+          <button className="btn btn-success mt-3">
+            Guardar Pedido
+          </button>
 
-    Guardar Pedido
+        </div>
 
-  </button>
-
-</div>
-
-        <table className="table table-striped">
+        <table className="table table-striped shadow">
 
           <thead className="table-dark">
 
@@ -85,11 +83,8 @@ function Pedidos() {
               <tr key={pedido.id}>
 
                 <td>{pedido.id}</td>
-
                 <td>{pedido.cliente}</td>
-
                 <td>{pedido.estado}</td>
-
                 <td>{pedido.repartidor}</td>
 
               </tr>
