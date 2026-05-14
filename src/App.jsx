@@ -18,31 +18,15 @@ function Login() {
 
   return (
 
-    <div
-  className="container-fluid d-flex justify-content-center align-items-center"
-  style={{
-    height: '100vh',
-    background: 'linear-gradient(to right, #141e30, #243b55)'
-  }}
->
+    <div className="container mt-5">
 
       <div className="row justify-content-center">
 
         <div className="col-md-4">
 
-          <div
-  className="card p-5 shadow-lg border-0"
-  style={{
-    borderRadius: '20px'
-  }}
->
+          <div className="card p-4 shadow">
 
-            <h2
-  className="text-center mb-4 fw-bold"
-  style={{
-    color: '#243b55'
-  }}
->
+            <h2 className="text-center mb-4">
               Iniciar Sesión
             </h2>
 
@@ -59,7 +43,7 @@ function Login() {
             />
 
             <button
-              className="btn btn-dark w-100 py-2"
+              className="btn btn-primary w-100"
               onClick={ingresar}
             >
               Ingresar
