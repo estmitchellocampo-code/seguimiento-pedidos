@@ -13,7 +13,7 @@ function Repartidores() {
   // 🔵 CARGAR DESDE BACKEND
   const cargarRepartidores = async () => {
     try {
-      const res = await fetch("http://localhost:3001/repartidores");
+      const res = await fetch("https://seguimiento-pedidos-6c1v.onrender.com/repartidores");
       const data = await res.json();
       setRepartidores(data);
     } catch (error) {
@@ -36,7 +36,7 @@ function Repartidores() {
     // ✏️ EDITAR (PUT)
     if (editandoId) {
       try {
-        await fetch(`http://localhost:3001/repartidores/${editandoId}`, {
+        await fetch(`https://seguimiento-pedidos-6c1v.onrender.com/repartidores/${editandoId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function Repartidores() {
     // ➕ CREAR (POST)
     else {
       try {
-        await fetch("http://localhost:3001/repartidores", {
+        await fetch("https://seguimiento-pedidos-6c1v.onrender.com/repartidores", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function Repartidores() {
     if (!confirmar) return;
 
     try {
-      await fetch(`http://localhost:3001/repartidores/${id}`, {
+      await fetch(`https://seguimiento-pedidos-6c1v.onrender.com/repartidores/${id}`, {
         method: "DELETE",
       });
 
