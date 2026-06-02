@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://seguimiento-pedidos-6c1v.onrender.com";
 
 // 📦 PEDIDOS
 export const getPedidos = async () => {
