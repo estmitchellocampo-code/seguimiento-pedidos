@@ -1,10 +1,22 @@
 const express = require("express")
 const cors = require("cors")
+const mongoose = require("mongoose")
 
 const pedidosRoutes = require("./routes/pedidos")
 const repartidoresRoutes = require("./routes/repartidores")
 
 const app = express()
+
+mongoose.connect(
+  "mongodb://Valeria02:Valeria0211@ac-7zhnpfq-shard-00-00.bte5rqq.mongodb.net:27017,ac-7zhnpfq-shard-00-01.bte5rqq.mongodb.net:27017,ac-7zhnpfq-shard-00-02.bte5rqq.mongodb.net:27017/?ssl=true&replicaSet=atlas-11b02r-shard-0&authSource=admin&appName=Cluster0"
+)
+
+.then(() => {
+  console.log("MongoDB conectado")
+})
+.catch((error) => {
+  console.error("Error MongoDB:", error)
+})
 
 app.use(cors())
 app.use(express.json())
