@@ -1,43 +1,31 @@
 const express = require("express")
-
 const router = express.Router()
 
-let repartidores = [
-  {
-    id: 1,
-    nombre: "Carlos",
-    telefono: "3001234567",
-    zona: "Norte"
-  }
-]
+const Repartidor = require("../models/Repartidor")
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+
+  const repartidores =
+    await Repartidor.find()
+
   res.json(repartidores)
+
 })
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
 
-  const nuevoRepartidor = {
-    id: Date.now(),
-    ...req.body
-  }
-
-  repartidores.push(nuevoRepartidor)
+  const nuevoRepartidor =
+    await Repartidor.create(req.body)
 
   res.json(nuevoRepartidor)
 
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
 
-  const id = Number(req.params.id)
-
-  repartidores = repartidores.map((r) =>
-
-    r.id === id
-      ? { ...r, ...req.body }
-      : r
-
+  await Repartidor.findByIdAndUpdate(
+    req.params.id,
+    req.body
   )
 
   res.json({
@@ -46,12 +34,10 @@ router.put("/:id", (req, res) => {
 
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
 
-  const id = Number(req.params.id)
-
-  repartidores = repartidores.filter(
-    r => r.id !== id
+  await Repartidor.findByIdAndDelete(
+    req.params.id
   )
 
   res.json({

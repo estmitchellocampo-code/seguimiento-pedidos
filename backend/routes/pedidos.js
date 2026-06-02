@@ -1,45 +1,30 @@
 const express = require("express")
-
 const router = express.Router()
 
-let pedidos = [
-  {
-    id: 1,
-    cliente: "PRUEBA EXPRESS",
-    origen: "Bogotá",
-    destino: "Zipaquirá",
-    descripcion: "API funcionando",
-    estado: "Pendiente"
-  }
-]
+const Pedido = require("../models/Pedido")
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+
+  const pedidos = await Pedido.find()
+
   res.json(pedidos)
+
 })
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
 
-  const nuevoPedido = {
-    id: Date.now(),
-    ...req.body
-  }
-
-  pedidos.push(nuevoPedido)
+  const nuevoPedido =
+    await Pedido.create(req.body)
 
   res.json(nuevoPedido)
 
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
 
-  const id = Number(req.params.id)
-
-  pedidos = pedidos.map((pedido) =>
-
-    pedido.id === id
-      ? { ...pedido, ...req.body }
-      : pedido
-
+  await Pedido.findByIdAndUpdate(
+    req.params.id,
+    req.body
   )
 
   res.json({
@@ -48,12 +33,10 @@ router.put("/:id", (req, res) => {
 
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
 
-  const id = Number(req.params.id)
-
-  pedidos = pedidos.filter(
-    pedido => pedido.id !== id
+  await Pedido.findByIdAndDelete(
+    req.params.id
   )
 
   res.json({
