@@ -10,6 +10,7 @@ import { useState } from "react"
 import Dashboard from "./pages/Dashboard"
 import Pedidos from "./pages/Pedidos"
 import Repartidores from "./pages/Repartidores"
+import Ruta from "./pages/Ruta"
 
 import ProtectedRoute from "./components/ProtectedRoute"
 
@@ -20,62 +21,62 @@ function Login() {
   const [usuario, setUsuario] = useState("")
   const [password, setPassword] = useState("")
 
- const iniciarSesion = async () => {
+  const iniciarSesion = async () => {
 
-  try {
+    try {
 
-    const respuesta = await fetch(
-      "https://seguimiento-pedidos-6c1v.onrender.com/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          usuario,
-          password
-        })
+      const respuesta = await fetch(
+        "https://seguimiento-pedidos-6c1v.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            usuario,
+            password
+          })
+        }
+      )
+
+      const datos = await respuesta.json()
+
+      if (!respuesta.ok) {
+
+        alert(datos.mensaje)
+
+        return
+
       }
-    )
 
-    const datos = await respuesta.json()
+      localStorage.setItem(
+        "rol",
+        datos.rol
+      )
 
-    if (!respuesta.ok) {
+      if (datos.rol === "admin") {
 
-      alert(datos.mensaje)
+        navigate("/dashboard")
 
-      return
+      } else {
+
+        navigate("/pedidos")
+
+      }
 
     }
 
-    localStorage.setItem(
-      "rol",
-      datos.rol
-    )
+    catch (error) {
 
-    if (datos.rol === "admin") {
+      console.error(error)
 
-      navigate("/dashboard")
-
-    } else {
-
-      navigate("/pedidos")
+      alert(
+        "No fue posible conectar con el servidor"
+      )
 
     }
 
   }
-
-  catch (error) {
-
-    console.error(error)
-
-    alert(
-      "No fue posible conectar con el servidor"
-    )
-
-  }
-
-}
 
   return (
 
@@ -200,6 +201,20 @@ function App() {
               roles={["admin"]}
             >
               <Repartidores />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/ruta"
+          element={
+            <ProtectedRoute
+              roles={[
+                "admin",
+                "repartidor"
+              ]}
+            >
+              <Ruta />
             </ProtectedRoute>
           }
         />

@@ -55,18 +55,34 @@ function Navbar() {
               >
                 Repartidores
               </Link>
+
+              <Link
+                className="btn btn-outline-light me-2"
+                to="/ruta"
+              >
+                Ruta
+              </Link>
             </>
 
           )}
 
           {rol === "repartidor" && (
 
-            <Link
-              className="btn btn-outline-light me-2"
-              to="/pedidos"
-            >
-              Pedidos
-            </Link>
+            <>
+              <Link
+                className="btn btn-outline-light me-2"
+                to="/pedidos"
+              >
+                Pedidos
+              </Link>
+
+              <Link
+                className="btn btn-outline-light me-2"
+                to="/ruta"
+              >
+                Ruta
+              </Link>
+            </>
 
           )}
 
