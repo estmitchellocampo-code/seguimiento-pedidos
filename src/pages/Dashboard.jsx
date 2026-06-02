@@ -20,7 +20,7 @@ function Dashboard() {
 
       const respuestaPedidos =
         await fetch(
-          "http://localhost:3001/pedidos"
+          "https://seguimiento-pedidos-6c1v.onrender.com/pedidos"
         )
 
       const pedidos =
@@ -28,7 +28,7 @@ function Dashboard() {
 
       const respuestaRepartidores =
         await fetch(
-          "http://localhost:3001/repartidores"
+          "https://seguimiento-pedidos-6c1v.onrender.com/repartidores"
         )
 
       const repartidores =

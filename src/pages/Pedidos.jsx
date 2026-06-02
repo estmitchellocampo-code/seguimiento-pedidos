@@ -14,7 +14,7 @@ function Pedidos() {
   // 🔵 CARGAR DESDE BACKEND
   const cargarPedidos = async () => {
     try {
-      const respuesta = await fetch("http://localhost:3001/pedidos");
+      const respuesta = await fetch("https://seguimiento-pedidos-6c1v.onrender.com/pedidos");
       const datos = await respuesta.json();
       setPedidos(datos);
     } catch (error) {
@@ -37,7 +37,7 @@ function Pedidos() {
     // ✏️ EDITAR (PUT)
     if (editandoId) {
       try {
-        await fetch(`http://localhost:3001/pedidos/${editandoId}`, {
+        await fetch(`https://seguimiento-pedidos-6c1v.onrender.com/pedidos/${editandoId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function Pedidos() {
     // ➕ CREAR (POST)
     else {
       try {
-        await fetch("http://localhost:3001/pedidos", {
+        await fetch("https://seguimiento-pedidos-6c1v.onrender.com/pedidos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function Pedidos() {
     if (!confirmar) return;
 
     try {
-      await fetch(`http://localhost:3001/pedidos/${id}`, {
+      await fetch(`https://seguimiento-pedidos-6c1v.onrender.com/pedidos/${id}`, {
         method: "DELETE",
       });
 
