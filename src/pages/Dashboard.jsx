@@ -1,7 +1,70 @@
-import Navbar from '../components/Navbar'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import Navbar from "../components/Navbar"
+import { Link } from "react-router-dom"
 
 function Dashboard() {
+
+  const [totalPedidos, setTotalPedidos] = useState(0)
+  const [totalRepartidores, setTotalRepartidores] = useState(0)
+  const [totalEntregados, setTotalEntregados] = useState(0)
+
+  useEffect(() => {
+
+    cargarDatos()
+
+  }, [])
+
+  const cargarDatos = async () => {
+
+    try {
+
+      const respuestaPedidos =
+        await fetch(
+          "http://localhost:3001/pedidos"
+        )
+
+      const pedidos =
+        await respuestaPedidos.json()
+
+      const respuestaRepartidores =
+        await fetch(
+          "http://localhost:3001/repartidores"
+        )
+
+      const repartidores =
+        await respuestaRepartidores.json()
+
+      setTotalPedidos(
+        pedidos.length
+      )
+
+      setTotalRepartidores(
+        repartidores.length
+      )
+
+      const entregados =
+        pedidos.filter(
+          pedido =>
+            pedido.estado === "Entregado"
+        )
+
+      setTotalEntregados(
+        entregados.length
+      )
+
+    }
+
+    catch (error) {
+
+      console.error(error)
+
+      alert(
+        "Error cargando dashboard"
+      )
+
+    }
+
+  }
 
   return (
 
@@ -24,7 +87,7 @@ function Dashboard() {
               <h3>Pedidos</h3>
 
               <p className="display-6">
-                15
+                {totalPedidos}
               </p>
 
               <Link
@@ -45,7 +108,7 @@ function Dashboard() {
               <h3>Repartidores</h3>
 
               <p className="display-6">
-                5
+                {totalRepartidores}
               </p>
 
             </div>
@@ -59,7 +122,7 @@ function Dashboard() {
               <h3>Entregados</h3>
 
               <p className="display-6">
-                20
+                {totalEntregados}
               </p>
 
             </div>
