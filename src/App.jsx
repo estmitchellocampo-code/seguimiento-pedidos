@@ -1,3 +1,4 @@
+import Seguimiento from "./pages/Seguimiento"
 import {
   BrowserRouter,
   Routes,
@@ -168,7 +169,16 @@ function App() {
           path="/"
           element={<Login />}
         />
-
+<Route
+  path="/seguimiento"
+  element={
+    <ProtectedRoute
+      roles={["admin"]}
+    >
+      <Seguimiento />
+    </ProtectedRoute>
+  }
+/>
         <Route
           path="/dashboard"
           element={

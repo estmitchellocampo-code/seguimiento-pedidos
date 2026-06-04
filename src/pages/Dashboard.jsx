@@ -6,7 +6,7 @@ function Dashboard() {
 
   const [totalPedidos, setTotalPedidos] = useState(0)
   const [totalRepartidores, setTotalRepartidores] = useState(0)
-  const [totalEntregados, setTotalEntregados] = useState(0)
+  const [totalSeguimiento, setTotalSeguimiento] = useState(0)
 
   useEffect(() => {
 
@@ -42,15 +42,10 @@ function Dashboard() {
         repartidores.length
       )
 
-      const entregados =
-        pedidos.filter(
-          pedido =>
-            pedido.estado === "Entregado"
-        )
-
-      setTotalEntregados(
-        entregados.length
+      setTotalSeguimiento(
+      pedidos.length
       )
+      
 
     }
 
@@ -68,64 +63,77 @@ function Dashboard() {
 
   return (
 
-    <>
+  <>
 
-      <Navbar />
+    <Navbar />
 
-      <div className="container mt-4">
+    <div className="container mt-4">
 
-        <h1 className="mb-4 fw-bold">
-          Dashboard
-        </h1>
+      <h1 className="mb-4 fw-bold">
+        Dashboard
+      </h1>
 
-        <div className="row">
+      <div className="row">
 
-          <div className="col-md-4 mb-4">
+        <div className="col-md-4 mb-4">
 
-            <div className="card p-4 shadow-lg border-0">
+          <div className="card p-4 shadow-lg border-0">
 
-              <h3>Pedidos</h3>
+            <h3>Pedidos</h3>
 
-              <p className="display-6">
-                {totalPedidos}
-              </p>
+            <p className="display-6">
+              {totalPedidos}
+            </p>
 
-              <Link
-                to="/pedidos"
-                className="btn btn-primary"
-              >
-                Ver pedidos
-              </Link>
-
-            </div>
+            <Link
+              to="/pedidos"
+              className="btn btn-primary"
+            >
+              Ver pedidos
+            </Link>
 
           </div>
 
-          <div className="col-md-4 mb-4">
+        </div>
 
-            <div className="card p-4 shadow-lg border-0">
+        <div className="col-md-4 mb-4">
 
-              <h3>Repartidores</h3>
+          <div className="card p-4 shadow-lg border-0">
 
-              <p className="display-6">
-                {totalRepartidores}
-              </p>
+            <h3>Repartidores</h3>
 
-            </div>
+            <p className="display-6">
+              {totalRepartidores}
+            </p>
+
+            <Link
+              to="/repartidores"
+              className="btn btn-success"
+            >
+              Ver repartidores
+            </Link>
 
           </div>
 
-          <div className="col-md-4 mb-4">
+        </div>
 
-            <div className="card p-4 shadow-lg border-0">
+        <div className="col-md-4 mb-4">
 
-              <h3>Entregados</h3>
+          <div className="card p-4 shadow-lg border-0">
 
-              <p className="display-6">
-                {totalEntregados}
-              </p>
+            <h3>Seguimiento</h3>
 
-            </div>
+            <p className="display-6">
+              {totalSeguimiento}
+            </p>
+
+            <Link
+  to="/seguimiento"
+  className="btn btn-warning"
+>
+  Ver seguimiento
+</Link>
+    
 
           </div>
 
@@ -133,9 +141,11 @@ function Dashboard() {
 
       </div>
 
-    </>
+    </div>
 
-  )
+  </>
+
+)
 
 }
 

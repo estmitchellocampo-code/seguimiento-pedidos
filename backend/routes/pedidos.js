@@ -14,7 +14,17 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
 
   const nuevoPedido =
-    await Pedido.create(req.body)
+    await Pedido.create({
+
+      ...req.body,
+
+      historial: [
+        {
+          accion: "Pedido creado"
+        }
+      ]
+
+    })
 
   res.json(nuevoPedido)
 
@@ -22,10 +32,27 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 
-  await Pedido.findByIdAndUpdate(
-    req.params.id,
+  const pedido =
+    await Pedido.findById(req.params.id)
+
+  if (!pedido) {
+
+    return res.status(404).json({
+      mensaje: "Pedido no encontrado"
+    })
+
+  }
+
+  pedido.historial.push({
+    accion: "Pedido actualizado"
+  })
+
+  Object.assign(
+    pedido,
     req.body
   )
+
+  await pedido.save()
 
   res.json({
     mensaje: "Pedido actualizado"

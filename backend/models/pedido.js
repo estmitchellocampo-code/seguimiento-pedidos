@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 
+const mongoose = require("mongoose")
+
 const pedidoSchema = new mongoose.Schema({
 
   cliente: String,
@@ -18,7 +20,18 @@ const pedidoSchema = new mongoose.Schema({
   estado: {
     type: String,
     default: "Pendiente"
-  }
+  },
+
+  historial: [
+    {
+      accion: String,
+
+      fecha: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
 
 })
 
