@@ -4,6 +4,12 @@ import Navbar from "../components/Navbar";
 function Pedidos() {
 
   const [pedidos, setPedidos] = useState([]);
+  const [repartidores, setRepartidores] = useState([]);
+
+const [
+  repartidorAsignado,
+  setRepartidorAsignado
+] = useState("");
 
   const [cliente, setCliente] = useState("");
   const [origen, setOrigen] = useState("");
@@ -11,43 +17,60 @@ function Pedidos() {
   const [descripcion, setDescripcion] = useState("");
   const [estado, setEstado] = useState("Pendiente");
 
-  const [
-  repartidorAsignado,
-  setRepartidorAsignado
-] = useState("")
-
   const [filtroEstado, setFiltroEstado] = useState("Todos");
 
   const [editandoId, setEditandoId] = useState(null);
 
-  const cargarPedidos = async () => {
+const cargarPedidos = async () => {
 
-    try {
+  try {
 
-      const respuesta =
-        await fetch(
-          "https://seguimiento-pedidos-6c1v.onrender.com/pedidos"
-        );
+    const respuesta =
+      await fetch(
+        "https://seguimiento-pedidos-6c1v.onrender.com/pedidos"
+      );
 
-      const datos = await respuesta.json();
+    const datos = await respuesta.json();
 
-      setPedidos(datos);
+    setPedidos(datos);
 
-    } catch (error) {
+  } catch (error) {
 
-      console.error(error);
+    console.error(error);
 
-      alert("Error al cargar pedidos");
+    alert("Error al cargar pedidos");
 
-    }
+  }
 
-  };
+};
 
-  useEffect(() => {
+const cargarRepartidores = async () => {
 
-    cargarPedidos();
+  try {
 
-  }, []);
+    const respuesta =
+      await fetch(
+        "https://seguimiento-pedidos-6c1v.onrender.com/repartidores"
+      );
+
+    const datos = await respuesta.json();
+
+    setRepartidores(datos);
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+};
+
+useEffect(() => {
+
+  cargarPedidos();
+  cargarRepartidores();
+
+}, []);
 
   const guardarPedido = async () => {
 
@@ -76,12 +99,13 @@ function Pedidos() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              cliente,
-              origen,
-              destino,
-              descripcion,
-              estado,
-            }),
+            cliente,
+            origen,
+            destino,
+            descripcion,
+            repartidorAsignado,
+            estado,
+           }),
           }
         );
 
@@ -107,12 +131,13 @@ function Pedidos() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              cliente,
-              origen,
-              destino,
-              descripcion,
-              estado,
-            }),
+            cliente,
+            origen,
+            destino,
+            descripcion,
+            repartidorAsignado,
+            estado,
+           }),
           }
         );
 
@@ -131,6 +156,7 @@ function Pedidos() {
     setDestino("");
     setDescripcion("");
     setEstado("Pendiente");
+    setRepartidorAsignado("");
 
   };
 
@@ -168,15 +194,20 @@ function Pedidos() {
 
  const editarPedido = (pedido) => {
 
-  setCliente(pedido.cliente)
-  setOrigen(pedido.origen)
-  setDestino(pedido.destino)
-  setDescripcion(pedido.descripcion)
-  setEstado(pedido.estado)
+  setCliente(pedido.cliente);
+  setOrigen(pedido.origen);
+  setDestino(pedido.destino);
+  setDescripcion(pedido.descripcion);
 
-  setEditandoId(pedido.id)
+  setRepartidorAsignado(
+    pedido.repartidorAsignado || ""
+  );
 
-};;
+  setEstado(pedido.estado);
+
+  setEditandoId(pedido.id);
+
+};
 
   const pedidosFiltrados =
     pedidos.filter((pedido) => {
@@ -271,6 +302,45 @@ function Pedidos() {
 
             <div className="col-md-6 mb-3">
 
+  <select
+    className="form-select"
+    value={repartidorAsignado}
+    onChange={(e) => {
+
+      setRepartidorAsignado(
+        e.target.value
+      );
+
+      if (e.target.value !== "") {
+
+        setEstado("Asignado");
+
+      }
+
+    }}
+  >
+
+    <option value="">
+      Seleccione un repartidor
+    </option>
+
+    {repartidores.map((r) => (
+
+      <option
+        key={r.id}
+        value={r.nombre}
+      >
+        {r.nombre}
+      </option>
+
+    ))}
+
+  </select>
+
+</div>
+
+            <div className="col-md-6 mb-3">
+
               <select
                 className="form-select"
                 value={estado}
@@ -281,17 +351,21 @@ function Pedidos() {
                 }
               >
 
-                <option>
-                  Pendiente
+                <option value="Pendiente">
+                 Pendiente
                 </option>
 
-                <option>
-                  En tránsito
+                <option value="Asignado">
+                 Asignado
                 </option>
 
-                <option>
-                  Entregado
-                </option>
+               <option value="En tránsito">
+                En tránsito
+              </option>
+
+              <option value="Entregado">
+                Entregado
+              </option>
 
               </select>
 
@@ -335,20 +409,24 @@ function Pedidos() {
           >
 
             <option value="Todos">
-              Todos
-            </option>
+  Todos
+</option>
 
-            <option value="Pendiente">
-              Pendiente
-            </option>
+<option value="Pendiente">
+  Pendiente
+</option>
 
-            <option value="En tránsito">
-              En tránsito
-            </option>
+<option value="Asignado">
+  Asignado
+</option>
 
-            <option value="Entregado">
-              Entregado
-            </option>
+<option value="En tránsito">
+  En tránsito
+</option>
+
+<option value="Entregado">
+  Entregado
+</option>
 
           </select>
 
@@ -365,6 +443,7 @@ function Pedidos() {
               <th>Origen</th>
               <th>Destino</th>
               <th>Descripción</th>
+              <th>Repartidor</th>
               <th>Estado</th>
               <th>Acciones</th>
 
@@ -397,6 +476,10 @@ function Pedidos() {
 
                   <td>
                     {pedido.descripcion}
+                  </td>
+
+                  <td>
+                    {pedido.repartidorAsignado || "-"}
                   </td>
 
                   <td>

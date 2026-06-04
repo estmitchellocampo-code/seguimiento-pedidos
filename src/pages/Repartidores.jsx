@@ -163,7 +163,7 @@ function Repartidores() {
     setCapacidadMaxima(r.capacidadMaxima || "");
     setEstado(r.estado || "Disponible");
 
-    setEditandoId(r._id);
+    setEditandoId(r.id);
 
   };
 
@@ -319,9 +319,9 @@ function Repartidores() {
 
             {repartidores.map((r) => (
 
-              <tr key={r._id}>
+              <tr key={r.id}>
 
-                <td>{r._id}</td>
+                <td>{r.id}</td>
                 <td>{r.nombre}</td>
                 <td>{r.telefono}</td>
                 <td>{r.zona}</td>
@@ -343,7 +343,7 @@ function Repartidores() {
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() =>
-                      eliminarRepartidor(r._id)
+                      eliminarRepartidor(r.id)
                     }
                   >
                     Eliminar
