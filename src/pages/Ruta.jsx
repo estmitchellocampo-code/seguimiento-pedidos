@@ -1,9 +1,11 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar"
 
 function Ruta() {
 
   return (
+
     <>
+
       <Navbar />
 
       <div className="container mt-4">
@@ -52,31 +54,62 @@ function Ruta() {
 
         <div className="row">
 
-          <div className="col-md-6">
+          <div className="col-md-5">
 
-            <div className="card p-4 shadow">
+            <div className="card p-4 shadow h-100">
 
-              <h4>Historial</h4>
+              <h3 className="mb-4">
+                Historial del Pedido
+              </h3>
 
-              <ul>
-                <li>Pedido creado</li>
-                <li>Pedido asignado</li>
-                <li>En ruta</li>
-                <li>Próxima entrega</li>
-              </ul>
+              <div className="mb-4">
+                ✅ Pedido creado
+                <br />
+                <small>
+                  24/05/2026 - 07:00
+                </small>
+              </div>
+
+              <div className="mb-4">
+                📦 Pedido asignado
+                <br />
+                <small>
+                  24/05/2026 - 08:00
+                </small>
+              </div>
+
+              <div className="mb-4">
+                🚚 En ruta
+                <br />
+                <small>
+                  26/05/2026 - 09:00
+                </small>
+              </div>
+
+              <div>
+                📍 Próxima entrega
+                <br />
+                <small>
+                  Zipaquirá, Cundinamarca
+                </small>
+              </div>
 
             </div>
 
           </div>
 
-          <div className="col-md-6">
+          <div className="col-md-7">
 
-            <div className="card p-2 shadow">
+            <div className="card p-3 shadow">
+
+              <h4 className="mb-3">
+                Ruta Actual del Repartidor
+              </h4>
 
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Mapa_de_Bogot%C3%A1.svg/1200px-Mapa_de_Bogot%C3%A1.svg.png"
-                alt="Ruta"
-                className="img-fluid"
+                src="https://media.bikemap.net/routes/4333520/staticmaps/in_e921b2dc-fc69-490a-91ca-e783df7f6ab4_694x400_bikemap-2021-3D-static.png"
+                alt="Ruta del pedido"
+                className="img-fluid rounded"
               />
 
             </div>
@@ -86,8 +119,11 @@ function Ruta() {
         </div>
 
       </div>
+
     </>
-  );
+
+  )
+
 }
 
-export default Ruta;
+export default Ruta

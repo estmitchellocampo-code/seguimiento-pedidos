@@ -11,6 +11,11 @@ function Pedidos() {
   const [descripcion, setDescripcion] = useState("");
   const [estado, setEstado] = useState("Pendiente");
 
+  const [
+  repartidorAsignado,
+  setRepartidorAsignado
+] = useState("")
+
   const [filtroEstado, setFiltroEstado] = useState("Todos");
 
   const [editandoId, setEditandoId] = useState(null);
@@ -129,12 +134,16 @@ function Pedidos() {
 
   };
 
-  const eliminarPedido = async (id) => {
+  
+  
 
-    const confirmar =
-      window.confirm(
-        "¿Está seguro de eliminar este pedido?"
-      );
+  
+    const eliminarPedido = async (id) => {
+
+  const confirmar =
+    window.confirm(
+      "¿Está seguro de eliminar este pedido?"
+    );
 
     if (!confirmar) return;
 
@@ -157,17 +166,17 @@ function Pedidos() {
 
   };
 
-  const editarPedido = (pedido) => {
+ const editarPedido = (pedido) => {
 
-    setCliente(pedido.cliente);
-    setOrigen(pedido.origen);
-    setDestino(pedido.destino);
-    setDescripcion(pedido.descripcion);
-    setEstado(pedido.estado);
+  setCliente(pedido.cliente)
+  setOrigen(pedido.origen)
+  setDestino(pedido.destino)
+  setDescripcion(pedido.descripcion)
+  setEstado(pedido.estado)
 
-    setEditandoId(pedido._id);
+  setEditandoId(pedido.id)
 
-  };
+};;
 
   const pedidosFiltrados =
     pedidos.filter((pedido) => {
@@ -368,10 +377,10 @@ function Pedidos() {
             {pedidosFiltrados.map(
               (pedido) => (
 
-                <tr key={pedido._id}>
+                <tr key={pedido.id}>
 
                   <td>
-                    {pedido._id}
+                   {pedido.id}
                   </td>
 
                   <td>
@@ -408,15 +417,13 @@ function Pedidos() {
                     </button>
 
                     <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() =>
-                        eliminarPedido(
-                          pedido._id
-                        )
-                      }
-                    >
-                      Eliminar
-                    </button>
+  className="btn btn-danger btn-sm"
+  onClick={() =>
+    eliminarPedido(pedido.id)
+  }
+>
+  Eliminar
+</button>
 
                   </td>
 
